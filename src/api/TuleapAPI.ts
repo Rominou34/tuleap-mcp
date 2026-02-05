@@ -83,6 +83,11 @@ class TuleapAPI {
     );
   }
 
+  // Get single artifact by ID
+  async getArtifact(artifactId: number): Promise<Artifact | null> {
+    return this.makeRequest<Artifact>(`/artifacts/${artifactId}`);
+  }
+
   // Get current user information
   async getCurrentUser(): Promise<User | null> {
     return this.makeRequest<User>("/users/me");

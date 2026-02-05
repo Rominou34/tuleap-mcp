@@ -4,10 +4,10 @@ import { config } from "./config";
 import { getProjectsTool } from "./tools/getProjects";
 import { getTrackersTool } from "./tools/getTrackers";
 import { getArtifactsTool } from "./tools/getArtifacts";
+import { getArtifactTool } from "./tools/getArtifact";
 import { getCurrentUserTool } from "./tools/getCurrentUser";
 
 console.error("Tuleap MCP Server - Initialization started");
-console.error("Config loaded:", JSON.stringify(config, null, 2));
 
 // Create server instance
 console.error("Creating server instance...");
@@ -41,6 +41,13 @@ try {
     getArtifactsTool.handler,
   );
   console.error("✓ get-artifacts tool registered");
+
+  server.registerTool(
+    getArtifactTool.name,
+    getArtifactTool.options,
+    getArtifactTool.handler,
+  );
+  console.error("✓ get-artifact tool registered");
 
   server.registerTool(
     getCurrentUserTool.name,
