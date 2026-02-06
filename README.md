@@ -21,6 +21,8 @@ Prerequisite: You need to have [Node.js](https://nodejs.org/) (v16 or later) and
 
 3. Configure your Tuleap credentials by copying `.env.example` to `.env` and filling in the required values.
 
+4. Run `npm run build` to generate the `dist/index.js` file.
+
 ## Tools
 
 Run the dev server:
@@ -37,6 +39,7 @@ npm run dev
 | get-projects     | Get a list of projects the authenticated user has access to | None                                      |
 | get-trackers     | Get trackers for a specific project                         | projectId (int)                           |
 | get-artifacts    | Get artifacts from a specific tracker                       | trackerId (int), limit (int, default: 50) |
+| get-articat      | Get details from a specific artifact                        | artifactId (int)                          |
 
 ## Configuration
 
@@ -46,9 +49,28 @@ Example `mcp.json` configuration:
 {
   "mcpServers": {
     "tuleap-mcp": {
-      "command": "npm",
-      "args": ["run", "dev:server"],
-      "cwd": "path/to/tuleap-mcp"
+      "type": "stdio",
+      "command": "node",
+      "args": ["/path/to/tuleap-mcp/dist/index.js"],
+      "cwd": "/path/to/tuleap-mcp"
+    }
+  }
+}
+```
+
+For OpenCode, example `.config/opencode/config.json` configuration :
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "tuleap-mcp": {
+      "type": "local",
+      "command": [
+        "node",
+        "/path/to/tuleap-mcp/dist/index.js"
+      ],
+      "enabled": true
     }
   }
 }
